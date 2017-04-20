@@ -1,0 +1,50 @@
+#main {
+	width: 75%;
+    float: left;
+}
+.aside {
+	width: 20%;
+	float: right;
+	background-color: lightgrey;
+}
+table.courses {
+	border-collapse:collapse;
+}
+th {
+	background-color: lightBlue;
+}
+td {
+    padding: 5px 20px;
+	text-align: center;	
+}
+.course {
+	border-bottom: silver 1px solid;
+}
+.credit, .score, #totalCredit, #totalGradePoint, #gpa {
+    border: 0;
+    border-bottom: red solid 1px;
+    background-color: inherit;
+    text-align: center;
+}
+.point, .gradePoint {
+    border: 0;
+    background-color: inherit;
+    text-align: center;
+}
+.point, .gradePoint, #totalCredit, #totalGradePoint, #gpa {
+	cursor: default;
+}
+.addCourse {
+	margin-top: 20px;
+    background-color: lightGreen;
+    cursor: pointer;
+}
+.removeCourse {
+	color: lightCoral;
+    cursor: pointer;
+}
+.removeCourse:hover{
+	color: red;
+	font-weight: bolder;
+    text-decoration: underline;
+}

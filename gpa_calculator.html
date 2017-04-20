@@ -1,0 +1,520 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "//www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en-US">
+<head>
+<meta charset="utf-8"> 
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="sndnyang" />
+<meta name="copyright" content="sndnyang" />
+
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary">
+
+<link href="//cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/bootstrap/2.3.2/css/bootstrap-responsive.min.css" rel="stylesheet">
+<link href="//cdn.bootcss.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+<style>
+body { padding-top: 50px; padding-bottom: 10px; }
+</style>
+
+<link rel="stylesheet" href="//bdimg.share.baidu.com/static/api/css/share_style1_24.css">
+<link rel="stylesheet" type="text/css" href="/theme/css/style.css" media="screen">
+<title>GPA calculator for all </title>
+<script src="static/js/function.js"></script>
+<script src="static/js/UploadFile.js"></script>
+<script src="static/js/file.js"></script>
+<script src="//lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="static/css/gpa.css">
+<!--<link rel="stylesheet" type="text/css" href="static/css/c5.css">-->
+
+</head>
+<body>
+<div id="content-sans-footer">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/"><span class=site-name>懒龙谷</span></a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav pull-right top-menu">
+                        <li ><a href="/">Home</a></li>
+                        <li ><a href="http://www.zhimind.com">zhimind home</a></li>
+                        <li ><a href="/categories.html">Categories</a></li>
+                        <li ><a href="/tags.html">Tags</a></li>
+                        <li ><a href="/archives.html">Archives</a></li>
+                        <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div id="wrap" class="span9">
+            <h1>GPA 计算器calculator</h1>
+            <div id="main">
+                <a href="gpa_calculator_en.html">English version</a>
+                <div id="GPAForm">
+                    <p>通过本程序，可以方便的计算出您所修读的课程的GPA。具体方法是在下面的方框中输入您</p>
+                    <p>修读获得的课程学分和课程分数（如果是等级制的，在下拉框选择对应等级），页面下方会</p>
+                    <p>累计加权结果。</p>
+                    <hr>
+                    <div>
+                        可上传文件
+                        <input type="file" id="file" onchange="uploadFiles(this.files)">
+                        <br> 请按照下方格式描述选择字段， 课程名 ? 百分制? 等级制 ? 4分制 ? 学分 ? 学时    ?指代分隔符类型，默认使用空格作为分隔符
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <input type="text" id="type">分隔符类型， 支持逗号、分号、空格、 tab(tab 或\t), 默认使用空格作为分隔符, 
+                </div>
+
+                <hr />
+                定制文件格式， 学分必选， 三种记分方式中选一种
+                <br>
+                <input type="checkbox" name="select" value="0" checked="checked" >课程名
+                <input type="checkbox" name="select" value="1" checked="checked" >百分制
+                <input type="checkbox" name="select" value="3"                   >等级制
+                <input type="checkbox" name="select" value="2"                   >4分制
+                <input type="checkbox" name="select" value="4" checked="checked" >学分
+                <input type="checkbox" name="select" value="5" checked="checked" >学时
+                <br>
+                文件或下框内容的格式必须与选中字段保持相同顺序（可多不可少）
+
+                <hr />
+                也可手输， 上传文件则直接显示。
+                <div> <textarea id="grade" style="border:solid 1px" rows="15" cols="120"></textarea>
+                </div>
+
+                请选择GPA算法
+                <select id="algorithm">
+                    <option value ="s4">标准4.0</option>
+                    <option value ="s41" selected = "selected">改进4.0(1)</option>
+                    <option value ="s42">改进4.0(2)</option>
+                    <option value ="p4">北大4.0</option>
+                    <option value ="c4">加拿大4.3</option>
+                    <option value ="sjt4">上海交大4.3</option>
+                    <option value ="cs4">中科大4.3</option>
+                </select>
+                <br>
+                <input type="button" value="计算" onclick="calit();"> 
+
+                <hr />
+
+                <div id="totals">
+                    <label>学分总计：
+                        <input id="sum0" type="text" size="7" maxlength="7" placeholder="请先填表" readonly="readonly" />
+                    </label>
+                    <label>学分*绩点总计：
+                        <input id="sum1" type="text" size="7" maxlength="7" placeholder="请先填表" readonly="readonly" />
+                    </label>
+                    <label>GPA：
+                        <input id="sum2" type="text" size="7" maxlength="7" placeholder="请先填表" readonly="readonly" />
+                    </label>
+                    <label>加权平均分：
+                        <input id="sum3" type="text" size="7" maxlength="7" placeholder="请先填表" readonly="readonly" />
+                    </label>
+                </div>
+
+                <hr />
+
+                <div id="content">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="aside">
+            <div class="section">
+                <h2>如何计算GPA？</h2>
+                <div class="article">
+                    <div class="intro">
+                        <div class="intro_top">
+                            <div class="intro_top_le f14">其他常见算法说明</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="intro_con f12">
+                            <div class="intro_col">
+                                <table border="0" cellpadding="0" cellspacing="0" width="120">
+                                    <tbody><tr>
+                                        <td colspan="2"><b>(1)标准4.0</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>成绩</td>
+                                        <td>GPA</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100～90</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>89～80</td>
+                                        <td>3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>79～70</td>
+                                        <td>2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>69～60</td>
+                                        <td>1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>59～0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody></table>
+                                <table border="0" cellpadding="0" cellspacing="0" width="120">
+                                    <tbody><tr>
+                                        <td colspan="2"><b>(2)改进4.0(1)</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>成绩</td>
+                                        <td>学分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100～85</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>84～70</td>
+                                        <td>3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>69～60</td>
+                                        <td>2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>59～0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody></table><table border="0" cellpadding="0" cellspacing="0" width="120">
+                                    <tbody><tr>
+                                        <td colspan="2"><b>(3)改进4.0(2)</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>成绩</td>
+                                        <td>学分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100～85</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>84～75</td>
+                                        <td>3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>74～60</td>
+                                        <td>2.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>59～0</td>
+                                        <td>0</td>
+                                    </tr>
+                            </tbody></table></div><div class="intro_col"><table border="0" cellpadding="0" cellspacing="0" width="240">
+                                    <tbody><tr>
+                                        <td colspan="2"><b>(4)北大4.0</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>成绩</td>
+                                        <td>学分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100～90</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>89～85</td>
+                                        <td>3.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>84～82</td>
+                                        <td>3.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>81～78</td>
+                                        <td>3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>77～75</td>
+                                        <td>2.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>74～72</td>
+                                        <td>2.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>71～68</td>
+                                        <td>2.0</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>67～64</td>
+                                        <td>1.5</td>
+                                    </tr>
+                                    <tr>
+                                        <td>63～60</td>
+                                        <td>1.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>59～0</td>
+                                        <td>0</td>
+                                    </tr>
+                                </tbody></table><table border="0" cellpadding="0" cellspacing="0" width="240">
+                                    <tbody><tr>
+                                        <td colspan="2"><b>(5)加拿大4.3</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td>成绩</td>
+                                        <td>学分</td>
+                                    </tr>
+                                    <tr>
+                                        <td>100～90</td>
+                                        <td>4.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>89～85</td>
+                                        <td>4.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>84～80</td>
+                                        <td>3.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>79～75</td>
+                                        <td>3.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>74～70</td>
+                                        <td>3.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>69～65</td>
+                                        <td>2.7</td>
+                                    </tr>
+                                    <tr>
+                                        <td>64～60</td>
+                                        <td>2.3</td>
+                                    </tr>
+                                    <tr>
+                                        <td>59～0</td>
+                                        <td>0</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="display: block;" class="intro_wrapper"><div class="intro_hundred intro_item"><div class="intro_col"><table border="0" cellpadding="0" cellspacing="0" width="240">
+                                            <tbody><tr>
+                                                <td colspan="2"><b>(6)中科大4.3</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>成绩</td>
+                                                <td>学分</td>
+                                            </tr>
+                                            <tr>
+                                                <td>100～95</td>
+                                                <td>4.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>94～90</td>
+                                                <td>4.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>89～85</td>
+                                                <td>3.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>84～82</td>
+                                                <td>3.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>81～78</td>
+                                                <td>3.0</td>
+                                            </tr>  
+                                            <tr>
+                                                <td>77～75</td>
+                                                <td>2.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>74～72</td>
+                                                <td>2.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>71～68</td>
+                                                <td>2.0</td>
+                                            </tr>  
+                                            <tr>
+                                                <td>67～65</td>
+                                                <td>1.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>64～64</td>
+                                                <td>1.5</td>
+                                            </tr>  
+                                            <tr>
+                                                <td>63～61</td>
+                                                <td>1.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>60～60</td>
+                                                <td>1.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>59～0</td>
+                                                <td>0</td>
+                                            </tr>
+                                    </tbody></table></div><div class="intro_col"><table border="0" cellpadding="0" cellspacing="0" width="240">
+                                            <tbody><tr>
+                                                <td colspan="2"><b>(7)上海交大4.3</b></td>
+                                            </tr>
+                                            <tr>
+                                                <td>成绩</td>
+                                                <td>学分</td>
+                                            </tr>
+                                            <tr>
+                                                <td>100～95</td>
+                                                <td>4.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>94～90</td>
+                                                <td>4.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>89～85</td>
+                                                <td>3.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>84～80</td>
+                                                <td>3.3</td>
+                                            </tr>
+                                            <tr>
+                                                <td>79～75</td>
+                                                <td>3.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>74～70</td>
+                                                <td>2.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>69～67</td>
+                                                <td>2.3</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>66～65</td>
+                                                <td>2.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>64～62</td>
+                                                <td>1.7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>61～60</td>
+                                                <td>1.0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>59～0</td>
+                                                <td>0</td>
+                                            </tr>
+                                </tbody></table></div></div><div style="display: none;" class="intro_five intro_item"><table style="width: 240px;" border="0" cellpadding="0" cellspacing="0">
+                                        <tbody><tr>
+                                            <td colspan="2"><b>五分制算法</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>成绩</td>
+                                            <td>学分</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>4.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>3.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>1.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>1～0</td>
+                                            <td>0</td>
+                                        </tr>
+                                </tbody></table></div><div style="display: none;" class="intro_rank intro_item"><table style="width: 240px;" border="0" cellpadding="0" cellspacing="0" width="240">
+
+                                        <tbody><tr>
+                                            <td colspan="4"><b>等级制算法</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>成绩</td>
+                                            <td>学分</td>
+                                            <td>成绩</td>
+                                            <td>学分</td>
+                                        </tr>
+                                        <tr>
+                                            <td>A</td>
+                                            <td>4.0</td>
+                                            <td>A-</td>
+                                            <td>3.7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>B+</td>
+                                            <td>3.3</td>
+                                            <td>B</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr>
+                                            <td>B-</td>
+                                            <td>2.7</td>
+                                            <td>C+</td>
+                                            <td>2.3</td>
+                                        </tr>  
+                                        <tr>
+                                            <td>C</td>
+                                            <td>2.0</td>
+                                            <td>C-</td>
+                                            <td>1.7</td>
+                                        </tr>
+                                        <tr><td>D+</td>
+                                            <td>1.3</td>
+                                            <td>D</td>
+                                            <td>1.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>F</td>
+                                            <td>0</td>
+                                        </tr>
+                            </tbody></table></div></div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <p>绩点（Grade Point Average 缩写GPA）是对学生各门课程所获学分的加权平均值，是衡量学生学业水平的重要指标。</p>
+                    <p>原有四级记分制的成绩：优（85-100）、良（70-84）、及格（60-69）、不及格（未达60分为不及格），按照就高不就低原则对应绩点。</p>
+                    <p>其中“优”对应绩点为4.0,“良”对应绩点为3.0，“及格”对应绩点为“1.3”，“不及格”对应绩点为“0”。两级记分制（合格、不合格）的课程成绩，不纳入课程学分绩点计算。</p>
+                </div><!-- .article -->
+            </div><!-- .section -->
+        </div><!-- .aside -->
+    </div>
+    <div id="footer">
+        <p>
+        这是 gpa calculator。 made in China, 杨秀隆 xiulong.yancey.yang@gmail.com  sndnyangd@gmail.com
+        </p>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
