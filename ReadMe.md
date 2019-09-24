@@ -12,7 +12,15 @@ Don't input one by one by hand.
 
 上传文件 或 复制粘贴到文本框 即可计算， 7种算法可供选择， 拒绝手输。
 
+# License
+
+This project is licensed under the MIT License. See LICENSE for more details
+
 # 更新历史
+
+## 2019-09-17
+
+添加LICENSE 开源协议
 
 ## 2017-06-30
 
